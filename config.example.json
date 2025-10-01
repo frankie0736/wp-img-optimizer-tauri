@@ -1,0 +1,23 @@
+{
+  "openai": {
+    "api_url": "https://api.openai.com/v1",
+    "api_key": "sk-your-openai-api-key-here"
+  },
+  "wordpress_sites": [
+    {
+      "id": "my-blog",
+      "site_url": "https://your-wordpress-site.com",
+      "username": "your-username",
+      "app_password": "xxxx xxxx xxxx xxxx",
+      "context": "这是一个关于科技的博客，专注于人工智能和编程",
+      "convert_to_webp": true,
+      "quality": 85,
+      "max_width": 1920
+    }
+  ],
+  "image_optimizer": {
+    "convert_to_webp": true,
+    "max_width": 1920,
+    "quality": 85
+  }
+}
