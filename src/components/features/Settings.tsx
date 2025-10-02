@@ -470,7 +470,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       <Card>
         <CardContent className="pt-6">
           <div className="text-center text-sm text-muted-foreground space-y-1">
-            <p className="font-medium text-foreground">FX Toolbox v0.1.0</p>
+            <p className="font-medium text-foreground">FX Toolbox v0.2.0</p>
             <p>开发者: <span className="font-medium">Frankie徐</span></p>
             <p>联系方式: <a href="mailto:tsuicx@qq.com" className="text-primary hover:underline">tsuicx@qq.com</a></p>
             <p className="text-xs pt-2">

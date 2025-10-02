@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "FX Toolbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.fx210studio.toolbox",
   "build": {
     "frontendDist": "../dist",
