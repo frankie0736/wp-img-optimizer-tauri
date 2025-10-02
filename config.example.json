@@ -9,7 +9,7 @@
       "site_url": "https://your-wordpress-site.com",
       "username": "your-username",
       "app_password": "xxxx xxxx xxxx xxxx",
-      "context": "这是一个关于科技的博客，专注于人工智能和编程",
+      "context": "网站基本信息，有助于ai更好地理解图片",
       "convert_to_webp": true,
       "quality": 85,
       "max_width": 1920
