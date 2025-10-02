@@ -33,7 +33,7 @@ function App() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground">加载中...</p>
         </div>
       </div>
     );
@@ -43,7 +43,7 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600">Failed to load configuration</p>
+          <p className="text-red-600">加载配置失败</p>
         </div>
       </div>
     );
@@ -56,7 +56,7 @@ function App() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">FX Toolbox</h1>
           <p className="text-muted-foreground">
-            WordPress Image Optimizer - AI-powered image processing and upload
+            WordPress 图片优化工具 - AI 驱动的图片处理与上传
           </p>
         </div>
 
@@ -65,11 +65,11 @@ function App() {
           <TabsList className="grid w-full max-w-md grid-cols-2">
             <TabsTrigger value="upload" className="flex items-center gap-2">
               <Upload className="w-4 h-4" />
-              Upload
+              上传
             </TabsTrigger>
             <TabsTrigger value="settings" className="flex items-center gap-2">
               <SettingsIcon className="w-4 h-4" />
-              Settings
+              设置
             </TabsTrigger>
           </TabsList>
 

@@ -54,12 +54,12 @@ export function ImageUploader({ config }: ImageUploaderProps) {
     if (!files || files.length === 0) return;
 
     if (!config.openai) {
-      alert("Please configure OpenAI in settings first");
+      alert("请先在设置中配置 OpenAI");
       return;
     }
 
     if (config.wordpress_sites.length === 0) {
-      alert("Please configure at least one WordPress site in settings");
+      alert("请先在设置中配置至少一个 WordPress 站点");
       return;
     }
 
@@ -97,7 +97,7 @@ export function ImageUploader({ config }: ImageUploaderProps) {
       // Get site config
       const site = config.wordpress_sites.find(s => s.id === selectedSiteId);
       if (!site) {
-        throw new Error("Selected site not found");
+        throw new Error("未找到选择的站点");
       }
 
       // Process image (compress/convert)
@@ -212,7 +212,7 @@ export function ImageUploader({ config }: ImageUploaderProps) {
       {config.wordpress_sites.length > 1 && (
         <Card>
           <CardContent className="pt-6">
-            <label className="text-sm font-medium mb-2 block">Target WordPress Site</label>
+            <label className="text-sm font-medium mb-2 block">目标 WordPress 站点</label>
             <select
               className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
               value={selectedSiteId}
@@ -246,10 +246,10 @@ export function ImageUploader({ config }: ImageUploaderProps) {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <p className="text-lg font-medium mb-2">
-              Drop images here or click to select
+              拖放图片到此处或点击选择
             </p>
             <p className="text-sm text-muted-foreground">
-              Supports JPG, PNG, WebP (max 50 images at once)
+              支持 JPG、PNG、WebP（一次最多 50 张图片）
             </p>
             <input
               ref={fileInputRef}
@@ -269,7 +269,7 @@ export function ImageUploader({ config }: ImageUploaderProps) {
           <CardContent className="pt-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold">
-                Upload Queue ({tasks.length})
+                上传队列 ({tasks.length})
               </h3>
               <Button
                 variant="outline"
@@ -277,7 +277,7 @@ export function ImageUploader({ config }: ImageUploaderProps) {
                 onClick={handleClearCompleted}
                 disabled={!tasks.some((t) => t.status === 'completed')}
               >
-                Clear Completed
+                清除已完成
               </Button>
             </div>
 
@@ -316,9 +316,9 @@ export function ImageUploader({ config }: ImageUploaderProps) {
                       <div className="mt-2">
                         <Progress value={task.progress} className="h-2" />
                         <p className="text-xs text-muted-foreground mt-1">
-                          {task.status === 'processing' && 'Processing image...'}
-                          {task.status === 'analyzing' && 'Analyzing with AI...'}
-                          {task.status === 'uploading' && 'Uploading to WordPress...'}
+                          {task.status === 'processing' && '处理图片中...'}
+                          {task.status === 'analyzing' && 'AI 分析中...'}
+                          {task.status === 'uploading' && '上传到 WordPress...'}
                         </p>
                       </div>
                     )}

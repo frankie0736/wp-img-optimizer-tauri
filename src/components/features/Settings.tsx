@@ -27,7 +27,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
   async function handleValidateOpenAI() {
     if (!openaiKey.trim()) {
-      setMessage("Please enter API key");
+      setMessage("请输入 API 密钥");
       return;
     }
 
@@ -51,13 +51,13 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
         await tauriApi.saveConfig(newConfig);
         onConfigUpdate(newConfig);
-        setMessage("✓ OpenAI validated and saved successfully!");
+        setMessage("✓ OpenAI 验证并保存成功！");
       } else {
-        setMessage("OpenAI validation failed");
+        setMessage("OpenAI 验证失败");
       }
     } catch (error) {
       setOpenaiValid(false);
-      setMessage(`Validation error: ${error}`);
+      setMessage(`验证错误: ${error}`);
     } finally {
       setValidatingOpenAI(false);
     }
@@ -79,9 +79,9 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
       await tauriApi.saveConfig(newConfig);
       onConfigUpdate(newConfig);
-      setMessage("Configuration saved successfully!");
+      setMessage("配置保存成功！");
     } catch (error) {
-      setMessage(`Failed to save: ${error}`);
+      setMessage(`保存失败: ${error}`);
     } finally {
       setSaving(false);
     }
@@ -104,11 +104,11 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
   async function handleSaveNewSite() {
     if (!newSite || !newSite.site_url || !newSite.username || !newSite.app_password) {
-      setMessage("Please fill in all required fields");
+      setMessage("请填写所有必填字段");
       return;
     }
 
-    setMessage("Validating WordPress site...");
+    setMessage("正在验证 WordPress 站点...");
     setSaving(true);
 
     try {
@@ -120,7 +120,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       );
 
       if (!isValid) {
-        setMessage("WordPress validation failed. Please check your credentials.");
+        setMessage("WordPress 验证失败，请检查您的凭据");
         setSaving(false);
         return;
       }
@@ -143,9 +143,9 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       onConfigUpdate(newConfig);
 
       setNewSite(null);
-      setMessage("✓ WordPress site validated and saved successfully!");
+      setMessage("✓ WordPress 站点验证并保存成功！");
     } catch (error) {
-      setMessage(`Validation error: ${error}`);
+      setMessage(`验证错误: ${error}`);
     } finally {
       setSaving(false);
     }
@@ -161,11 +161,11 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
     if (!editingSiteData || !editingSiteId) return;
 
     if (!editingSiteData.site_url || !editingSiteData.username || !editingSiteData.app_password) {
-      setMessage("Please fill in all required fields");
+      setMessage("请填写所有必填字段");
       return;
     }
 
-    setMessage("Validating WordPress site...");
+    setMessage("正在验证 WordPress 站点...");
     setSaving(true);
 
     try {
@@ -177,7 +177,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       );
 
       if (!isValid) {
-        setMessage("WordPress validation failed. Please check your credentials.");
+        setMessage("WordPress 验证失败，请检查您的凭据");
         setSaving(false);
         return;
       }
@@ -201,9 +201,9 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
       setEditingSiteId(null);
       setEditingSiteData(null);
-      setMessage("✓ WordPress site validated and saved successfully!");
+      setMessage("✓ WordPress 站点验证并保存成功！");
     } catch (error) {
-      setMessage(`Validation error: ${error}`);
+      setMessage(`验证错误: ${error}`);
     } finally {
       setSaving(false);
     }
@@ -216,7 +216,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
 
   function handleDeleteSite(id: string) {
     setSites(sites.filter(s => s.id !== id));
-    setMessage("Site removed! Don't forget to save configuration.");
+    setMessage("站点已移除！别忘了保存配置");
   }
 
   return (
@@ -226,10 +226,10 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <SettingsIcon className="w-5 h-5" />
-            OpenAI Configuration
+            OpenAI 配置
           </CardTitle>
           <CardDescription>
-            Configure OpenAI API for image analysis
+            配置 OpenAI API 用于图像分析
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -259,7 +259,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
               disabled={validatingOpenAI}
               variant="outline"
             >
-              {validatingOpenAI ? "Validating..." : "Validate"}
+              {validatingOpenAI ? "验证中..." : "验证"}
             </Button>
 
             {openaiValid !== null && (
@@ -278,9 +278,9 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       {/* WordPress Sites */}
       <Card>
         <CardHeader>
-          <CardTitle>WordPress Sites</CardTitle>
+          <CardTitle>WordPress 站点</CardTitle>
           <CardDescription>
-            Manage your WordPress sites for image upload
+            管理您的 WordPress 站点以上传图片
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -290,42 +290,42 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                 // Edit Form
                 <div className="border rounded-lg p-4 space-y-3 bg-muted/50">
                   <Input
-                    placeholder="Site URL (https://example.com)"
+                    placeholder="站点 URL (https://example.com)"
                     value={editingSiteData?.site_url || ""}
                     onChange={(e) => setEditingSiteData({ ...editingSiteData, site_url: e.target.value })}
                   />
                   <Input
-                    placeholder="Username"
+                    placeholder="用户名"
                     value={editingSiteData?.username || ""}
                     onChange={(e) => setEditingSiteData({ ...editingSiteData, username: e.target.value })}
                   />
                   <Input
                     type="password"
-                    placeholder="Application Password"
+                    placeholder="应用密码"
                     value={editingSiteData?.app_password || ""}
                     onChange={(e) => setEditingSiteData({ ...editingSiteData, app_password: e.target.value })}
                   />
                   <Input
-                    placeholder="Context (optional, e.g., 'A travel blog focused on Asian cuisine and scenery')"
+                    placeholder="上下文（可选，例如：'专注于亚洲美食和风景的旅游博客'）"
                     value={editingSiteData?.context || ""}
                     onChange={(e) => setEditingSiteData({ ...editingSiteData, context: e.target.value })}
                   />
 
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Convert to WebP</label>
+                      <label className="text-sm font-medium mb-2 block">转换为 WebP</label>
                       <select
                         className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
                         value={editingSiteData?.convert_to_webp ? "true" : "false"}
                         onChange={(e) => setEditingSiteData({ ...editingSiteData, convert_to_webp: e.target.value === "true" })}
                       >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                        <option value="true">是</option>
+                        <option value="false">否</option>
                       </select>
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Quality (1-100)</label>
+                      <label className="text-sm font-medium mb-2 block">质量 (1-100)</label>
                       <Input
                         type="number"
                         min="1"
@@ -336,7 +336,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Max Width (px)</label>
+                      <label className="text-sm font-medium mb-2 block">最大宽度 (px)</label>
                       <Input
                         type="number"
                         min="100"
@@ -350,11 +350,11 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                   <div className="flex gap-2">
                     <Button onClick={handleSaveEdit} size="sm">
                       <Check className="w-4 h-4 mr-1" />
-                      Save Changes
+                      保存更改
                     </Button>
                     <Button onClick={handleCancelEdit} variant="outline" size="sm">
                       <X className="w-4 h-4 mr-1" />
-                      Cancel
+                      取消
                     </Button>
                   </div>
                 </div>
@@ -364,14 +364,14 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <p className="font-medium">{site.site_url}</p>
-                      <p className="text-sm text-muted-foreground">User: {site.username}</p>
+                      <p className="text-sm text-muted-foreground">用户: {site.username}</p>
                       {site.context && (
-                        <p className="text-sm text-muted-foreground mt-1">Context: {site.context}</p>
+                        <p className="text-sm text-muted-foreground mt-1">上下文: {site.context}</p>
                       )}
                       <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
                         <span>WebP: {site.convert_to_webp ? '✓' : '✗'}</span>
-                        <span>Quality: {site.quality || 85}</span>
-                        <span>Max Width: {site.max_width || 1920}px</span>
+                        <span>质量: {site.quality || 85}</span>
+                        <span>最大宽度: {site.max_width || 1920}px</span>
                       </div>
                     </div>
                     <div className="flex gap-1">
@@ -379,7 +379,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                         variant="ghost"
                         size="icon"
                         onClick={() => handleEditSite(site)}
-                        title="Edit site"
+                        title="编辑站点"
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
@@ -387,7 +387,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                         variant="ghost"
                         size="icon"
                         onClick={() => handleDeleteSite(site.id)}
-                        title="Delete site"
+                        title="删除站点"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -401,42 +401,42 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
           {newSite && (
             <div className="border rounded-lg p-4 space-y-3">
               <Input
-                placeholder="Site URL (https://example.com)"
+                placeholder="站点 URL (https://example.com)"
                 value={newSite.site_url || ""}
                 onChange={(e) => setNewSite({ ...newSite, site_url: e.target.value })}
               />
               <Input
-                placeholder="Username"
+                placeholder="用户名"
                 value={newSite.username || ""}
                 onChange={(e) => setNewSite({ ...newSite, username: e.target.value })}
               />
               <Input
                 type="password"
-                placeholder="Application Password"
+                placeholder="应用密码"
                 value={newSite.app_password || ""}
                 onChange={(e) => setNewSite({ ...newSite, app_password: e.target.value })}
               />
               <Input
-                placeholder="Context (optional, e.g., 'A travel blog focused on Asian cuisine and scenery')"
+                placeholder="上下文（可选，例如：'专注于亚洲美食和风景的旅游博客'）"
                 value={newSite.context || ""}
                 onChange={(e) => setNewSite({ ...newSite, context: e.target.value })}
               />
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Convert to WebP</label>
+                  <label className="text-sm font-medium mb-2 block">转换为 WebP</label>
                   <select
                     className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
                     value={newSite.convert_to_webp ? "true" : "false"}
                     onChange={(e) => setNewSite({ ...newSite, convert_to_webp: e.target.value === "true" })}
                   >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value="true">是</option>
+                    <option value="false">否</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Quality (1-100)</label>
+                  <label className="text-sm font-medium mb-2 block">质量 (1-100)</label>
                   <Input
                     type="number"
                     min="1"
@@ -447,7 +447,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Max Width (px)</label>
+                  <label className="text-sm font-medium mb-2 block">最大宽度 (px)</label>
                   <Input
                     type="number"
                     min="100"
@@ -461,11 +461,11 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
               <div className="flex gap-2">
                 <Button onClick={handleSaveNewSite} size="sm">
                   <Check className="w-4 h-4 mr-1" />
-                  Save Site
+                  保存站点
                 </Button>
                 <Button onClick={() => setNewSite(null)} variant="outline" size="sm">
                   <X className="w-4 h-4 mr-1" />
-                  Cancel
+                  取消
                 </Button>
               </div>
             </div>
@@ -474,7 +474,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
           {!newSite && (
             <Button onClick={handleAddSite} variant="outline" className="w-full">
               <Plus className="w-4 h-4 mr-2" />
-              Add WordPress Site
+              添加 WordPress 站点
             </Button>
           )}
         </CardContent>
@@ -484,7 +484,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       <div className="flex items-center gap-4">
         <Button onClick={handleSaveConfig} disabled={saving} className="flex-1">
           <Save className="w-4 h-4 mr-2" />
-          {saving ? "Saving..." : "Save Configuration"}
+          {saving ? "保存中..." : "保存配置"}
         </Button>
       </div>
 
@@ -503,8 +503,8 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
         <CardContent className="pt-6">
           <div className="text-center text-sm text-muted-foreground space-y-1">
             <p className="font-medium text-foreground">FX Toolbox v0.1.0</p>
-            <p>Developed by <span className="font-medium">Frankie徐</span></p>
-            <p>Contact: <a href="mailto:tsuicx@qq.com" className="text-primary hover:underline">tsuicx@qq.com</a></p>
+            <p>开发者: <span className="font-medium">Frankie徐</span></p>
+            <p>联系方式: <a href="mailto:tsuicx@qq.com" className="text-primary hover:underline">tsuicx@qq.com</a></p>
             <p className="text-xs pt-2">
               © 2025 Frankie徐. Licensed under MIT License.
             </p>
