@@ -190,9 +190,39 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
     setEditingSiteData(null);
   }
 
-  function handleDeleteSite(id: string) {
-    setSites(sites.filter(s => s.id !== id));
-    setMessage("站点已移除！别忘了保存配置");
+  async function handleDeleteSite(id: string) {
+    // 找到要删除的站点信息用于确认提示
+    const siteToDelete = sites.find(s => s.id === id);
+    if (!siteToDelete) return;
+
+    // 确认对话框
+    const confirmed = window.confirm(
+      `确定要删除站点 "${siteToDelete.site_url}" 吗？\n\n此操作将立即生效且无法撤销。`
+    );
+
+    if (!confirmed) return;
+
+    try {
+      // 从列表中移除站点
+      const newSites = sites.filter(s => s.id !== id);
+      setSites(newSites);
+
+      // 自动保存配置
+      const newConfig: AppConfig = {
+        ...config,
+        openai: openaiKey.trim() ? {
+          api_url: openaiUrl.trim(),
+          api_key: openaiKey.trim(),
+        } : config.openai,
+        wordpress_sites: newSites,
+      };
+
+      await tauriApi.saveConfig(newConfig);
+      onConfigUpdate(newConfig);
+      setMessage("✓ 站点已删除并保存");
+    } catch (error) {
+      setMessage(`删除失败: ${error}`);
+    }
   }
 
   return (
