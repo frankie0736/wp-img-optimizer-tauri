@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Settings as SettingsIcon, Save, Plus, Trash2, Check, X, Edit } from "lucide-react";
+import { Settings as SettingsIcon, Plus, Trash2, Check, X, Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -60,30 +60,6 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
       setMessage(`验证错误: ${error}`);
     } finally {
       setValidatingOpenAI(false);
-    }
-  }
-
-  async function handleSaveConfig() {
-    setSaving(true);
-    setMessage("");
-
-    try {
-      const newConfig: AppConfig = {
-        ...config,
-        openai: openaiKey.trim() ? {
-          api_url: openaiUrl.trim(),
-          api_key: openaiKey.trim(),
-        } : undefined,
-        wordpress_sites: sites,
-      };
-
-      await tauriApi.saveConfig(newConfig);
-      onConfigUpdate(newConfig);
-      setMessage("配置保存成功！");
-    } catch (error) {
-      setMessage(`保存失败: ${error}`);
-    } finally {
-      setSaving(false);
     }
   }
 
@@ -259,7 +235,7 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
               disabled={validatingOpenAI}
               variant="outline"
             >
-              {validatingOpenAI ? "验证中..." : "验证"}
+              {validatingOpenAI ? "验证并保存中..." : "验证并保存"}
             </Button>
 
             {openaiValid !== null && (
@@ -479,14 +455,6 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
           )}
         </CardContent>
       </Card>
-
-      {/* Save Button */}
-      <div className="flex items-center gap-4">
-        <Button onClick={handleSaveConfig} disabled={saving} className="flex-1">
-          <Save className="w-4 h-4 mr-2" />
-          {saving ? "保存中..." : "保存配置"}
-        </Button>
-      </div>
 
       {message && (
         <div className={`p-4 rounded-lg ${
