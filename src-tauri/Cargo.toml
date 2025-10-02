@@ -1,10 +1,10 @@
 [package]
 name = "app"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+description = "FX Toolbox - WordPress Image Optimizer with AI-powered SEO metadata generation"
+authors = ["Frankie徐 <tsuicx@qq.com>"]
+license = "MIT"
+repository = "https://github.com/frankie0736/wp-img-optimizer-tauri"
 edition = "2021"
 rust-version = "1.77.2"
 

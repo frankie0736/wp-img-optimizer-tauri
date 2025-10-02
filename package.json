@@ -1,6 +1,13 @@
 {
   "name": "fx-toolbox",
   "version": "1.0.0",
+  "description": "FX Toolbox - WordPress Image Optimizer with AI-powered SEO metadata generation",
+  "author": "Frankie徐 <tsuicx@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankie0736/wp-img-optimizer-tauri.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

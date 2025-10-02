@@ -497,6 +497,20 @@ export function Settings({ config, onConfigUpdate }: SettingsProps) {
           {message}
         </div>
       )}
+
+      {/* About */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="text-center text-sm text-muted-foreground space-y-1">
+            <p className="font-medium text-foreground">FX Toolbox v0.1.0</p>
+            <p>Developed by <span className="font-medium">Frankie徐</span></p>
+            <p>Contact: <a href="mailto:tsuicx@qq.com" className="text-primary hover:underline">tsuicx@qq.com</a></p>
+            <p className="text-xs pt-2">
+              © 2025 Frankie徐. Licensed under MIT License.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
